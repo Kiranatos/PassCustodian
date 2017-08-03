@@ -22,8 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="600.0" minWidth="800.0" prefHeight="796.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="net.kiranatos.gui.DisplayController">
+<BorderPane minHeight="600.0" minWidth="800.0" prefHeight="796.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.kiranatos.gui.DisplayController">
     
    <top>
       <MenuBar BorderPane.alignment="CENTER">
@@ -54,7 +53,7 @@
    
    
    <center>
-      <VBox prefHeight="571.0" prefWidth="748.0" BorderPane.alignment="TOP_CENTER">
+      <VBox alignment="CENTER" prefHeight="571.0" prefWidth="748.0" BorderPane.alignment="TOP_CENTER">
          <children>
             <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="281.0" prefWidth="910.0">
                 
@@ -201,7 +200,8 @@
                               <Insets left="5.0" right="20.0" top="5.0" />
                            </padding>
                         </CheckBox>
-                        <ChoiceBox fx:id="choiceBoxLengthPass" minHeight="-Infinity" prefHeight="20.0" prefWidth="45.0" />
+                        
+                        <ChoiceBox fx:id="choiceBoxLengthPass" minHeight="-Infinity" prefWidth="45.0" />
                         <Label text="length">
                            <FlowPane.margin>
                               <Insets left="5.0" />
@@ -226,6 +226,18 @@
                         </ComboBox>
                      </children>
                   </FlowPane>
+                  
+                  <Button fx:id="pasteFromBufferSite" mnemonicParsing="false" onAction="#startListenerPasteFromBufferSite" prefHeight="25.0" prefWidth="100.0" text="Paste from Buffer" textFill="#321e70" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Impact" size="13.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <!-- *******************************   BUTTON <<CLEAR ALL>>               -->
+                  <Button fx:id="clearAll" mnemonicParsing="false" onAction="#startListenerClearAll" prefHeight="35.0" prefWidth="110.0" text="Clear" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                  
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
@@ -241,6 +253,7 @@
                </VBox.margin>
             </Label>
             <FlowPane prefHeight="25.0" prefWidth="800.0">
+                
                <children>
                   <CheckBox mnemonicParsing="false" selected="true" text="Site">
                      <padding>
@@ -262,11 +275,13 @@
                         <Insets left="5.0" right="20.0" top="5.0" />
                      </padding>
                   </CheckBox>
+                  
                   <CheckBox layoutX="150.0" layoutY="10.0" mnemonicParsing="false" selected="true" text="Tag">
                      <padding>
                         <Insets left="5.0" right="20.0" top="5.0" />
                      </padding>
                   </CheckBox>
+                  
                </children>
                <padding>
                   <Insets left="20.0" />
@@ -317,7 +332,7 @@
                   <Insets left="5.0" right="5.0" />
                </VBox.margin>
             </AnchorPane>
-            <FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="600.0">
+            <FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="700.0">
                <children>
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Add">
                      <FlowPane.margin>
@@ -337,6 +352,18 @@
                      <FlowPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </FlowPane.margin></Button>
+                     <!-- *******************************   BUTTON <<SAVE TO EXCEL FILE>>               -->
+                  <Button fx:id="saveToExcelFile" mnemonicParsing="false" onAction="#startListenerSaveToExcelFile" prefHeight="25.0" prefWidth="100.0" text="Save to Excel file">
+                     <FlowPane.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </FlowPane.margin>
+                  </Button>
+                  <!-- *******************************   BUTTON <<LOAD FROM EXCEL FILE>>               -->
+                  <Button fx:id="loadFromExcelFile" mnemonicParsing="false" onAction="#startListenerLoadFromExcelFile" prefHeight="25.0" prefWidth="100.0" text="Load from Excel file">
+                     <FlowPane.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </FlowPane.margin>
+                  </Button>
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

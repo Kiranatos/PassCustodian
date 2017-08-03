@@ -5,7 +5,13 @@ package net.kiranatos;
  */
 
 import java.awt.Toolkit;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Information {
     private static int def = 2;
@@ -58,4 +64,26 @@ public class Information {
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
         System.out.println("Содержимое буфера обмена:" + str);
     }    
+    /**
+     * Метод для получения строки из системного буфера обмена.     
+     */
+    public static String getClipboard() {                        
+        Transferable transfer = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
+        //StringSelection ss = (StringSelection)transfer;
+        String data = null;
+        try {
+            if ( transfer.isDataFlavorSupported(DataFlavor.stringFlavor) )    {
+                Object o = transfer.getTransferData( DataFlavor.stringFlavor );
+                data = (String)transfer.getTransferData( DataFlavor.stringFlavor );
+            }
+        } catch (UnsupportedFlavorException ex) {
+            Logger.getLogger(Information.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Information.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        
+        System.out.println("Содержимое буфера обмена:" + data);
+        
+        return data;
+    }
 }

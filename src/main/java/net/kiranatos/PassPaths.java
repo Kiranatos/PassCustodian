@@ -8,6 +8,8 @@ Start.class.getClassLoader().getResourceAsStream(MAIN_WINDOW_PATH);
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public abstract class PassPaths {
     public final static String HOT_SECRETS_PATH = "HotSecrets.dat";
@@ -15,8 +17,7 @@ public abstract class PassPaths {
     public final static String FROM_MULLER_VOCABULARY_PATH = "Muller.dat";
     public final static InputStream FROM_MULLER_VOCABULARY = Start.class.getClassLoader().getResourceAsStream(FROM_MULLER_VOCABULARY_PATH);        
     
-    public final static String MAIN_WINDOW_PATH = "/fxml/Display.fxml";
-    //public final static InputStream MAIN_WINDOW_INPUTSTREAM = Start.class.getClassLoader().getResourceAsStream(MAIN_WINDOW_PATH);
+    public final static String MAIN_WINDOW_PATH = "/fxml/Display.fxml";    
     public final static InputStream MAIN_WINDOW_INPUTSTREAM = Start.class.getClass().getResourceAsStream(MAIN_WINDOW_PATH);
     
     public final static String INFO_WINDOW_PATH = "/fxml/InfoWindow.fxml";    
@@ -29,6 +30,17 @@ public abstract class PassPaths {
     public static InputStream getInfoWindowInputStream(){
         INFO_WINDOW_INPUTSTREAM = Start.class.getClass().getResourceAsStream(INFO_WINDOW_PATH);
         return INFO_WINDOW_INPUTSTREAM;
+    }
+    
+    public final static String CSS_PATH_FOR_MAIN_WINDOW = "/styles/display.css";
+    
+    public final static InputStream FAVICON = Start.class.getClass().getResourceAsStream("/images/favicon.png");
+    
+    /**
+     * 
+     */
+    public static String getSaveNameFile() {
+        return "Passwords" + new SimpleDateFormat("yy-MM-dd-hh-mm-ss").format( new Date() ) + ".xlsx"; 
     }
    
 }

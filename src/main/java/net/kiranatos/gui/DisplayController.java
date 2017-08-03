@@ -51,7 +51,7 @@ public class DisplayController implements Initializable {
         inputNewMail.setPromptText          ("Введите почту");
         hop.setInputNewMail(inputNewMail);
         
-        inputTags.setPromptText             ("Введите теги");
+        inputTags.setPromptText             ("Введите теги, через запятую");
         hop.setInputTags(inputTags);
         
         
@@ -121,6 +121,30 @@ public class DisplayController implements Initializable {
     @FXML
     private Button saveInfo;
     public void startListenerSaveInfo (ActionEvent actionEvent) {        
+        actionEventToHeartOfProgram(actionEvent);
+    }
+    
+    @FXML
+    private Button clearAll;
+    public void startListenerClearAll (ActionEvent actionEvent) {        
+        actionEventToHeartOfProgram(actionEvent);
+    }
+    
+    @FXML
+    private Button pasteFromBufferSite;
+    public void startListenerPasteFromBufferSite (ActionEvent actionEvent) {
+        actionEventToHeartOfProgram(actionEvent);
+    }
+
+    @FXML
+    private Button saveToExcelFile;
+    public void startListenerSaveToExcelFile (ActionEvent actionEvent) {
+        actionEventToHeartOfProgram(actionEvent);
+    }
+    
+    @FXML
+    private Button loadFromExcelFile;
+    public void startListenerLoadFromExcelFile (ActionEvent actionEvent) {
         actionEventToHeartOfProgram(actionEvent);
     }
     

@@ -11,7 +11,10 @@ public class PasswordList {
     
     private ArrayList<OnePassObject> listOfSecrets;
     
-    // SAVE
+    /**
+     * Сохранение в файл HotSecrets.dat, если его нет - то создастся,
+     * Внимание: метод не дописывает, а переписывает файл заново, на основании созданного программой листа ArrayList<OnePassObject> @paramlistOfSecrets
+     */
     public void save() {
         try (
                 FileOutputStream f = new FileOutputStream(PassPaths.HOT_SECRETS_PATH);
@@ -31,7 +34,7 @@ public class PasswordList {
     
     /**
      * Загрузка файла HotSecrets.dat
-     * Нужно добавить проверку на его существование.
+     * Проверка на его существование добавлена!
      * @param path
      * @return 
      */
@@ -72,11 +75,16 @@ public class PasswordList {
         this.listOfSecrets = listOfSecrets;
     }
     
-    
+    /**
+     * Создать и добавить в список объект OnePassObject, по переданным значениям пароля, логина, почты, сайта и т.д.
+     */
     public void addToListOfPasswords(String login, String password, String site, String mail, String[]... otherInfo) {        
         addToListOfPasswords(new OnePassObject(login, password, site, mail, otherInfo));
     }    
     
+    /**
+     * Добавить в список уже созданный объект OnePassObject в другом классе
+     */
     public void addToListOfPasswords(OnePassObject opo) {
         if (listOfSecrets == null) {
             listOfSecrets = new ArrayList< OnePassObject >();

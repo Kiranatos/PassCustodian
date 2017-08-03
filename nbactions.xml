@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
+    <action>
+            <actionName>run</actionName>
+            <packagings>
+                <packaging>jar</packaging>
+            </packagings>
+            <goals>
+                <goal>process-classes</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
+            </goals>
+            <properties>
+                <exec.args>-classpath %classpath net.kiranatos.Start</exec.args>
+                <exec.executable>java</exec.executable>
+            </properties>
+        </action>    
+    
+    <!-- С этой фигней по F6 не запускается. Но возможно, она нужна для сборки : -->
+    <!--
         <action>
             <actionName>run</actionName>
             <goals>
@@ -22,5 +39,5 @@
                 <runfx.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -Dglass.disableGrab=true -jar "${project.build.directory}/${project.build.finalName}.jar"</runfx.args>
                 <jpda.listen>true</jpda.listen>
             </properties>
-        </action>        
+        </action>        -->
     </actions>

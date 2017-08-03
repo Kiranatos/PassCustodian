@@ -93,15 +93,26 @@ public class PasswordManager {
     }
     
     /**
-     * Добавление объеквта OnePassObject в список ObservableList<OnePassObject>
+     * Добавление объекта OnePassObject в список ObservableList<OnePassObject>
+     * И вызов метода saveToDefaultFile для сохранения этого объекта в файл HotSecret.dat     
      * @param onePassObject 
      */
     public void add(OnePassObject onePassObject) {
         observableListOfOnePassObject.add(onePassObject);
+        arrayListOfOnePassObject.add(onePassObject);
+        passwordManager.saveToDefaultFile(onePassObject);
     }
     
-    public void saveToDefaultFile() {
-        
+    /**
+     * Метод для записи объекта onePassObject в файл
+     * Внимание: метод перезаписывает весь файл, а не дописывает.
+     * Возможно в будущем, стоит сделать его потоком-демоном, чтобы не происходило обрыва записи при закрытии программы.
+     */
+    public void saveToDefaultFile(OnePassObject onePassObject) {
+        PasswordList m = new PasswordList();        
+        m.load(PassPaths.HOT_SECRETS_PATH);
+        m.addToListOfPasswords(onePassObject);
+        m.save();
     }
     
     
@@ -116,7 +127,7 @@ public class PasswordManager {
     public static void createFile(){               
         PasswordList m = new PasswordList();        
         m.load(PassPaths.HOT_SECRETS_PATH);
-        m.addToListOfPasswords("DartVader",  "LukeIamYourFaser", "www.porn.com",     "power@mail.com",    
+        m.addToListOfPasswords("DartVader",  "LukeIamYourFather", "www.porn.com",     "power@mail.com",    
                 new String[]{"tag1","sw"}, 
                 new String[]{"tag2","erotic"}, 
                 new String[]{"tag3","music"});
