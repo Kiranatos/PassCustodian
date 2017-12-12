@@ -1,6 +1,8 @@
 package net.kiranatos.gui.infowindow;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -22,10 +24,14 @@ public class InfoWindowApplication {
     private FXMLLoader fxmlLoader = new FXMLLoader();
     private Stage mainStage;
     
+    private static final Locale DEFAULT_LOCALE = new Locale( "en" );
+    private static final Locale CONFIGURATION_LOCALE = new Locale( PassPaths.getDefaultLocale() );
     
     public void showDialog() throws Exception {
         
-        setMainStage();
+        setMainStage(); 
+        
+        initLocalization(fxmlLoader);
         
         if (editDialogStage == null) {
             editDialogStage = new Stage();
@@ -58,5 +64,17 @@ public class InfoWindowApplication {
         Scene s1 = ((Node)a1.getSource()).getScene();
         
         this.mainStage = (Stage)s1.getWindow();
+    }
+    
+    
+    private void initLocalization(FXMLLoader fxmlLoader){        
+        try {
+            Locale.setDefault(CONFIGURATION_LOCALE);
+            fxmlLoader.setResources(ResourceBundle.getBundle("bundles.Locale"));                                // Localization
+        } catch (RuntimeException e) {
+            Information.println("Неправильная локализация в конфигурационном файле");
+            Locale.setDefault(DEFAULT_LOCALE);
+            fxmlLoader.setResources(ResourceBundle.getBundle("bundles.Locale"));            
+        }        
     }
 }

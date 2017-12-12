@@ -8,8 +8,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.kiranatos.Information;
 import net.kiranatos.res.OnePassObject;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -38,50 +40,27 @@ public class ExcelReader {
             Sheet sheetRead01 = wbReader.getSheetAt(0);            
                         
             for (Row r : sheetRead01) {
+                Information.println("строка №" + r.getRowNum() + " номер посл.ячейки: " + r.getLastCellNum() + " всего ячеек: " + r.getPhysicalNumberOfCells());
+                
                 if (r.getRowNum()!=0) {
-                    Cell c = r.getCell(0);
-                    if (c.getStringCellValue().length() > 0) {
+                    //Cell c = r.getCell(0);
+                    if (getCellStringValue(r, 0).length() > 0) {
                         //OnePassObject(String login(2), String password(4), String site(1), String mail(3), String[]... otherInfo)
-                        //Excel#	Site	Login	Mail	Password	Name Surname	Tags	Date	Other Info
+                        //Excel#	Site	Login	Mail	Password	Name Surname    Phone	Tags	Date	Other Info
                         readedList.add( new OnePassObject(
-                                r.getCell(2).getStringCellValue(),
-                                r.getCell(4).getStringCellValue(),
-                                r.getCell(1).getStringCellValue(),
-                                r.getCell(3).getStringCellValue(),                        
-                                new String[]{"namesurname", r.getCell(5).getStringCellValue()}, 
-                                new String[]{"tag", r.getCell(6).getStringCellValue()}, 
-                                new String[]{"date", r.getCell(7).getStringCellValue()}, 
-                                new String[]{"otherInfo", r.getCell(8).getStringCellValue()}                                
+                                getCellStringValue(r, 2),
+                                getCellStringValue(r, 4),
+                                getCellStringValue(r, 1),
+                                getCellStringValue(r, 3),
+                                new String[]{"namesurname",     getCellStringValue(r, 5)}, 
+                                new String[]{"phone",           getCellStringValue(r, 6)}, 
+                                new String[]{"tag",             getCellStringValue(r, 7)}, 
+                                new String[]{"date",            getCellStringValue(r, 8)}, 
+                                new String[]{"otherInfo",       getCellStringValue(r, 9)}                                
                         ));                                                
                     }
                 }
             }
-            //System.out.println("" + sheetRead01);
-            
-            /*
-            Row rowRead01 = sheetRead01.getRow(0);
-            Cell cellRead01  = rowRead01.getCell(0);
-            
-            String result01 = cellRead01.getStringCellValue();
-            System.out.println(result01);
-            
-            System.out.println(wbRead.getSheetAt(0).getRow(0).getCell(1).getStringCellValue());
-            getStringFromSell(wbRead);
-            
-            list.add(new OnePassObject("DartVader",  "LukeIamYourFaser", "www.porn.com",     "power@mail.com",    
-                new String[]{"tag1","sw"}, 
-                new String[]{"tag2","erotic"}, 
-                new String[]{"tag3","music"},                
-                new String[]{"tag","music"},                
-                new String[]{"tag","bully bully"},                
-                new String[]{"twitter","ooooooooooooooooo"},
-                new String[]{"NameSurname","Анаккин"}
-        ));
-            
-            */
-        
-        
-            
             
         } catch (FileNotFoundException ex) { 
             Logger.getLogger(ExcelReader.class.getName()).log(Level.SEVERE, null, ex); 
@@ -89,9 +68,18 @@ public class ExcelReader {
             Logger.getLogger(ExcelReader.class.getName()).log(Level.SEVERE, null, ex); 
         }
     }
-
     
-   
+    private String getCellStringValue(Row currentRow, int numOfCell) {
+        String str = "";
+        Cell c = currentRow.getCell(numOfCell);
+        if (c != null) {
+            System.out.println(c.getCellTypeEnum());
+            if (c.getCellTypeEnum().equals(CellType.NUMERIC)) { str = String.valueOf(c.getNumericCellValue()); }
+            else str = c.getStringCellValue();
+            //Information.println("numOfCell=" + numOfCell + " length=" + str.length() + " : " + str);
+        }
+        return str;
+    }
     
        
     private boolean isRowEmpty(Row row){

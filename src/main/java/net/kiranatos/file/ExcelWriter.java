@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.kiranatos.PassPaths;
@@ -43,14 +44,14 @@ public class ExcelWriter {
     private Workbook wbWriter;        
     private Sheet firstSheetWriter;
     private FileOutputStream fos;          
-    private ArrayList<OnePassObject> listToSave;
+    private List<OnePassObject> listToSave;
     private int indexOfList = 1;
     private int indexOfRow = 2;
     private int max = 20000;
     private File file = new File( PassPaths.getSaveNameFile() );    
     
     //private String[] headOfTable = PassPaths.HEAD_EXCEL_TABLE;
-    private String[] headOfTable = new String[] {"#", "Site", "Login", "Mail", "Password", "Name Surname", "Tags", "Date", "Other Info"};
+    private String[] headOfTable = new String[] {"#", "Site", "Login", "Mail", "Password", "Name Surname", "Phone Number", "Tags", "Date", "Other Info"};
     
     /**
      * Конструктор, который первым делом создает лист
@@ -71,7 +72,7 @@ public class ExcelWriter {
     /**
      * CONSTRUCTOR
      */
-    public ExcelWriter(ArrayList<OnePassObject> listToSave) {
+    public ExcelWriter(List<OnePassObject> listToSave) {
         this();
         this.listToSave = listToSave;        
     }
@@ -92,6 +93,7 @@ public class ExcelWriter {
                 opo.getMail(),
                 opo.getPassword(),
                 opo.getNameSurname(), 
+                opo.getPhoneNumber(),
                 opo.getTagsByString(),
                 opo.getCreatedDate(),
                 opo.getOtherInformation()
@@ -113,7 +115,8 @@ public class ExcelWriter {
         
         max = indexOfRow + 100;
         
-        /* Финальное оформление: */
+        /* Финальное оформление: 
+        цвет колонок 0,2,4,6,8 - LIGHT_TURQUOISE */
         nColumnStyle(0, IndexedColors.LIGHT_TURQUOISE);
         nColumnStyle(2, IndexedColors.LIGHT_TURQUOISE);
         nColumnStyle(4, IndexedColors.LIGHT_TURQUOISE);
@@ -128,7 +131,7 @@ public class ExcelWriter {
     }
     
     /**
-     * Записывает всю информаци в сам файл
+     * Записывает всю информацию в сам файл
      */    
     private void writeToFile (){
         try {        
@@ -148,8 +151,13 @@ public class ExcelWriter {
      * @return style     
      */
     private CellStyle createStyleOfCells(
-            IndexedColors bgColor, String fontName, int fontHeight,
-            boolean borderUp, boolean borderRight, boolean borderDown, boolean borderLeft            
+            IndexedColors bgColor, 
+            String fontName, 
+            int fontHeight,
+            boolean borderUp, 
+            boolean borderRight,
+            boolean borderDown, 
+            boolean borderLeft            
     ){        
         CellStyle style = wbWriter.createCellStyle();
         style.setFillPattern(FillPatternType.SOLID_FOREGROUND);

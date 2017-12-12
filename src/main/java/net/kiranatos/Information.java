@@ -1,7 +1,10 @@
 package net.kiranatos;
 
 /**
- * Создать ещё принтовский метод, выводящий весь стек вызова метода
+ * Какой функционал ещё можно додать:
+ * - Создать ещё принтовский метод, выводящий весь стек вызова метода
+ * - (До)Запись/Вывод в файл
+ * - Быстрое считывание из консоли
  */
 
 import java.awt.Toolkit;
@@ -13,8 +16,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Information {
+public class Information {    
+    
     private static int def = 2;
+    
     /**
      * Обёртка над System.out.print, которая добавляет к выводимой строке
      * информацию про класс и метод, где она была вызвана
@@ -29,8 +34,7 @@ public class Information {
                                                                                     //Thread.currentThread().getName().getClass()
                                                                                     //Thread.currentThread().getStackTrace()[2].getClassName()
         def = 2;
-    }
-    
+    }    
     /**
      * Обёртка над System.out.println, которая добавляет к выводимой строке
      * информацию про класс и метод, где она была вызвана
@@ -39,11 +43,10 @@ public class Information {
     public static void println(String str){
         def = 3;
         print(str+"\n");        
-    }
-    
+    }    
     /**
-     * Обёртка над System.out.print, которая добавляет к выводимой строке
-     * информацию про класс и метод, где она была вызвана
+     * Обёртка над System.out.print, которая выводит весь стек и добавляет к выводимым строкам
+     * информацию про класс и метод, где они были вызвана
      * @param str 
      */
     public static void printAllStack(){
@@ -51,6 +54,9 @@ public class Information {
         for(int i = 0; i< ste.length; i++)
             System.out.println("[" + ste[i].getClassName() + " : " + ste[i].getMethodName() + "]");
     }
+    
+    
+    
     
     /**
      * Метод для копирования строки в системный буфер обмена.
@@ -85,5 +91,32 @@ public class Information {
         System.out.println("Содержимое буфера обмена:" + data);
         
         return data;
+    }
+    
+    
+    
+    /**
+     * Усыпить поток на @milliseconds
+     */
+    public static void sleepMilliseconds(long milliseconds){
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException ex) { Logger.getLogger(Information.class.getName()).log(Level.SEVERE, null, ex); }
+    }
+    /**
+     * Усыпить поток на @seconds
+     */
+    public static void sleepSeconds(long seconds){
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException ex) { Logger.getLogger(Information.class.getName()).log(Level.SEVERE, null, ex); }
+    }
+    /**
+     * Усыпить поток на @minute
+     */
+    public static void sleepMinute(int minute){
+        try {
+            Thread.sleep(minute*60*1000);
+        } catch (InterruptedException ex) { Logger.getLogger(Information.class.getName()).log(Level.SEVERE, null, ex); }
     }
 }

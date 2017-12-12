@@ -48,14 +48,30 @@ public class ObservableManager {
      * сортировать данные в таблице
      * @param nameOfColumn - название колонки
      * @return 
-     */    
+     */    /*
     public Callback getColumnForTable(String nameOfColumn) {
-        Callback<TableColumn.CellDataFeatures<OnePassObject, String>, ObservableValue<String>> value;
+        Callback<
+                TableColumn.CellDataFeatures <OnePassObject, String>, 
+                ObservableValue<String>
+                > value;
         
-        value = new PropertyValueFactory<OnePassObject, String>(nameOfColumn);
+        value = new PropertyValueFactory<
+                OnePassObject, String
+                >(nameOfColumn);
         
         return value;
+    }*/
+    public Callback getColumnForTable(String nameOfColumn) {
+        return new Callback<TableColumn.CellDataFeatures<OnePassObject, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<OnePassObject, String> cellData) {
+                
+                return cellData.getValue().getProperty(nameOfColumn);
+            }
+        };
     }
+    
+    
     
     /**
      * Метод возвращает полный Observable список (с логинами, паролями, сайтами и тд)

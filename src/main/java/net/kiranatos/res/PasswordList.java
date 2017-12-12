@@ -9,7 +9,7 @@ import net.kiranatos.PassPaths;
 
 public class PasswordList {
     
-    private ArrayList<OnePassObject> listOfSecrets;
+    private List<OnePassObject> listOfSecrets;
     
     /**
      * Сохранение в файл HotSecrets.dat, если его нет - то создастся,
@@ -38,7 +38,7 @@ public class PasswordList {
      * @param path
      * @return 
      */
-    public ArrayList<OnePassObject> load(String path) {
+    public List<OnePassObject> load(String path) {
         
         File file = new File(path);
         if (file.exists()) {        
@@ -46,8 +46,10 @@ public class PasswordList {
                     FileInputStream f = new FileInputStream(path);
                     ObjectInputStream objS = new ObjectInputStream(f);
                     ){
-                
-                listOfSecrets = (ArrayList<OnePassObject>)objS.readObject();                
+                Information.println("trying to read...");
+                listOfSecrets = (ArrayList<OnePassObject>)objS.readObject(); 
+                //testAllParametrs();
+                Information.println("was read...");
             
             } catch (FileNotFoundException ex) {
                 Information.println("CLASS: MullerWords - FILE NOT FOUNDED !");
@@ -66,12 +68,12 @@ public class PasswordList {
     }
     
     // *************************** GETTERS
-    public ArrayList<OnePassObject> getListOfPasswords() {
+    public List<OnePassObject> getListOfPasswords() {
         return listOfSecrets;
     }
     
     // *************************** SETTERS
-    public void setListOfPasswords(ArrayList<OnePassObject> listOfSecrets) {
+    public void setListOfPasswords(List<OnePassObject> listOfSecrets) {
         this.listOfSecrets = listOfSecrets;
     }
     
@@ -91,4 +93,20 @@ public class PasswordList {
         }
         listOfSecrets.add(opo);
     }
+    
+//    private void testAllParametrs(){
+//        for (OnePassObject opo : listOfSecrets) {
+//            System.out.println("\t\t" + opo);
+//            System.out.println("\t\t" + opo.getCreatedDate());
+//            System.out.println("\t\t" + opo.getLogin());
+//            System.out.println("\t\t" + opo.getMailSSP());
+//            System.out.println("\t\t" + opo.getMailSSP().getName());
+//            System.out.println("\t\t" + opo.getMailSSP().getValue());
+//            System.out.println("\t\t" + opo.getMailSSP().get());
+//            System.out.println("\t\t" + opo.getMailSSP().getValueSafe());
+//            System.out.println("\t\t" + opo.getMailSSP().toString());
+//            System.out.println("\t\t" + opo);
+//        }       
+//        
+//    }
 }

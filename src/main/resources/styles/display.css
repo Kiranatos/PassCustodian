@@ -11,13 +11,17 @@
     -fx-text-fill: white;
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
-    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-background-color: linear-gradient(#1CEA8B, #821EAE);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );    
 }
 
 .button:hover{
-    -fx-base: #395bae;
-    -fx-background-color: red;
+    -fx-base: #395bae;    
+    -fx-background-color: linear-gradient(red, #821EAE);
+}
+
+.button:pressed{
+    -fx-background-color: linear-gradient(red, black);
 }
 
 .root {

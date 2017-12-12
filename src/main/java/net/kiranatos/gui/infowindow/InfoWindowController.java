@@ -1,6 +1,9 @@
 package net.kiranatos.gui.infowindow;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import net.kiranatos.HeartOfProgram;
 import net.kiranatos.Information;
@@ -21,51 +25,49 @@ public class InfoWindowController implements Initializable {
         this.opo = opo;
     }
     
+    // ----------------------------------------------------------- BUTTONS    
+    @FXML
+    private Button bufferSiteButton, bufferLoginButton, bufferPassButton, bufferMailButton, 
+            bufferTagsButton, bufferPhoneButton, bufferNameButton, bufferInfoButton,
+            okInfoWindow;
+    
+    // ----------------------------------------------------------- TextField
+    @FXML
+    private TextField textField_Site, textField_Login, textField_Pass, 
+            textField_Mail, textField_Tags, textField_Phone, 
+            textField_NameSurname, textField_Info;
+    private List<TextField> listTextField;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        listTextField = new ArrayList<>(Arrays.asList(textField_Site, textField_Login, textField_Pass,
+                textField_Mail, textField_Tags, textField_Phone, 
+                textField_NameSurname, textField_Info));
+        
         opo = HeartOfProgram.getHeartOfProgramImstance().getOnePassObject();
-        siteLabel.setText(opo.getSite());
-        passLabel.setText(opo.getPassword());
-        loginLabel.setText(opo.getLogin());
-        mailLabel.setText(opo.getMail());
-        tagsLabel.setText(opo.getTagsByString());
+        
+        textField_Site.setText(opo.getSite());        
+        
+        
+        textField_Login.setText(opo.getLogin());
+        textField_Pass.setText(opo.getPassword());
+        textField_Mail.setText(opo.getMail());
+        textField_Tags.setText(opo.getTagsByString());
+        textField_Phone.setText(opo.getPhoneNumber());
+        textField_NameSurname.setText(opo.getNameSurname());
+        textField_Info.setText(opo.getOtherInformation());
+        
+        for (TextField tf : listTextField) {
+            tf.setEditable(false);
+            //tf.setDisable(true);
+        }
     }    
     
     
-    // ----------------------------------------------------------- BUTTONS    
-    @FXML
-    private Button bufferSiteButton;
     
-    @FXML
-    private Button bufferLoginButton;
-    
-    @FXML
-    private Button bufferPassButton;
-    
-    @FXML
-    private Button bufferMailButton;
-    
-    @FXML
-    private Button okInfoWindow;
-    // ----------------------------------------------------------- LABELS
-    @FXML
-    private Label passLabel;
-    
-    @FXML
-    private Label siteLabel;
-    
-    @FXML
-    private Label loginLabel;
-    
-    @FXML
-    private Label mailLabel;
-    
-    @FXML
-    private Label tagsLabel;
     
     public void startListenerInfoWindowButtons (ActionEvent ae) {                
         Object source = ae.getSource();        
@@ -77,23 +79,39 @@ public class InfoWindowController implements Initializable {
         
         switch (str) {
             case "bufferSiteButton" : {                
-                Information.setClipboard(siteLabel.getText());
+                Information.setClipboard(textField_Site.getText());
                 break;
             }
             case "bufferLoginButton" : {                
-                Information.setClipboard(loginLabel.getText());
+                Information.setClipboard(textField_Login.getText());
                 break;
             }
             case "bufferMailButton" : {                
-                Information.setClipboard(mailLabel.getText());
+                Information.setClipboard(textField_Mail.getText());
+                break;
+            }            
+            case "bufferPassButton" : {                
+                Information.setClipboard(textField_Pass.getText());
+                break;
+            }
+            case "bufferTagsButton" : {                
+                Information.setClipboard(textField_Tags.getText());
+                break;
+            }
+            case "bufferPhoneButton" : {                
+                Information.setClipboard(textField_Phone.getText());
+                break;
+            }
+            case "bufferNameButton" : {                
+                Information.setClipboard(textField_NameSurname.getText());
+                break;
+            }
+            case "bufferInfoButton" : {                
+                Information.setClipboard(textField_Info.getText());
                 break;
             }
             case "okInfoWindow" : {                
                 actionClose(ae);
-                break;
-            }
-            case "bufferPassButton" : {                
-                Information.setClipboard(passLabel.getText());
                 break;
             }
             default: { Information.println("Erorr");/*throw new CheckBoxException();*/ }

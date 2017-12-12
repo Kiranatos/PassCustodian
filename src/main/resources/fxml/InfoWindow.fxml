@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -11,10 +11,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="210.0" prefWidth="560.0" 
-            styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" 
+<AnchorPane id="AnchorPane" 
+            prefHeight="310.0" 
+            prefWidth="560.0" 
+            styleClass="mainFxmlClass" 
+            xmlns="http://javafx.com/javafx/8.0.111" 
             xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="net.kiranatos.gui.infowindow.InfoWindowController">
+    
     <!--
     <stylesheets>
         <URL value="@InfoWindow.css" />
@@ -22,8 +26,13 @@
     -->
    
     <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" 
-            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="186.0" 
+            prefWidth="560.0" 
+            AnchorPane.bottomAnchor="0.0" 
+            AnchorPane.leftAnchor="0.0" 
+            AnchorPane.rightAnchor="0.0" 
+            AnchorPane.topAnchor="0.0">
+          
          <children>
             <GridPane>
               <columnConstraints>
@@ -37,11 +46,22 @@
                 <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
               </rowConstraints>
-               <children>
-                  
-                   
-                   <Button fx:id="bufferSiteButton" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#startListenerInfoWindowButtons" text="Copy to Buffer" textAlignment="CENTER" GridPane.columnIndex="2">
+
+
+              <children>
+<!-- BUTTONS FROM GRID -->
+                   <Button fx:id="bufferSiteButton"
+                           minHeight="25.0" 
+                           minWidth="100.0" 
+                           mnemonicParsing="false" 
+                           onAction="#startListenerInfoWindowButtons" 
+                           text="%b1" 
+                           textAlignment="CENTER" 
+                           GridPane.columnIndex="2">
                      <font>
                         <Font size="12.0" />
                      </font>
@@ -49,61 +69,84 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="bufferLoginButton" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#startListenerInfoWindowButtons" text="Copy to Buffer" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  
+                  <Button fx:id="bufferLoginButton" 
+                          minHeight="25.0" 
+                          minWidth="100.0"
+                          mnemonicParsing="false" 
+                          onAction="#startListenerInfoWindowButtons" 
+                          text="%b2" 
+                          textAlignment="CENTER" 
+                          GridPane.columnIndex="2" 
+                          GridPane.rowIndex="1">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="bufferPassButton" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#startListenerInfoWindowButtons" text="Copy to Buffer" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  
+                  <Button fx:id="bufferPassButton" 
+                          minHeight="25.0" 
+                          minWidth="100.0" 
+                          mnemonicParsing="false" 
+                          onAction="#startListenerInfoWindowButtons" 
+                          text="%b3" textAlignment="CENTER" 
+                          GridPane.columnIndex="2" 
+                          GridPane.rowIndex="2">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="bufferMailButton" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#startListenerInfoWindowButtons" text="Copy to Buffer" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                  
+                  <Button fx:id="bufferMailButton" 
+                          minHeight="25.0" 
+                          minWidth="100.0" 
+                          mnemonicParsing="false" 
+                          onAction="#startListenerInfoWindowButtons" 
+                          text="%b4" 
+                          textAlignment="CENTER" 
+                          GridPane.columnIndex="2" 
+                          GridPane.rowIndex="3">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Button>
-                  <Label fx:id="siteLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="250.0" text="www.site.com" textAlignment="CENTER" GridPane.columnIndex="1">
+                  
+                  <Button fx:id="bufferTagsButton" 
+                          layoutX="467.0" layoutY="117.0" minHeight="25.0" minWidth="100.0" 
+                          mnemonicParsing="false" onAction="#startListenerInfoWindowButtons" 
+                          text="%b5" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <font>
-                        <Font name="Arial" size="14.0" />
+                        <Font size="12.0" />
                      </font>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="loginLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="250.0" text="www.site.com" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  </Button>
+                  
+                  <Button fx:id="bufferPhoneButton" layoutX="467.0" layoutY="151.0" minHeight="25.0" minWidth="100.0" 
+                          mnemonicParsing="false" onAction="#startListenerInfoWindowButtons" 
+                          text="%b6" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <font>
-                        <Font name="Arial" size="14.0" />
+                        <Font size="12.0" />
                      </font>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="passLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="250.0" text="www.site.com" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  </Button>
+                  
+                  <Button fx:id="bufferNameButton" layoutX="467.0" layoutY="185.0" 
+                          minHeight="25.0" minWidth="100.0" mnemonicParsing="false" 
+                          onAction="#startListenerInfoWindowButtons" text="%b7" textAlignment="CENTER" 
+                          GridPane.columnIndex="2" GridPane.rowIndex="6">
                      <font>
-                        <Font name="Arial" size="14.0" />
+                        <Font size="12.0" />
                      </font>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="mailLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="250.0" text="www.site.com" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  </Button>
+                  
+                  <Button fx:id="bufferInfoButton" layoutX="467.0" layoutY="220.0" 
+                          minHeight="25.0" minWidth="100.0" mnemonicParsing="false" 
+                          onAction="#startListenerInfoWindowButtons" text="%b8" 
+                          textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="7">
                      <font>
-                        <Font name="Arial" size="14.0" />
+                        <Font size="12.0" />
                      </font>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="tagsLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="250.0" text="www.site.com" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
+                  </Button>
+                  
+<!-- LABELS FROM GRID -->
                   <Label text="Site: " textAlignment="CENTER">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -144,9 +187,54 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </Label>
+                  <Label layoutX="10.0" layoutY="150.0" text="Phone:" textAlignment="CENTER" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="185.0" text="Name:" textAlignment="CENTER" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="220.0" text="Information:" textAlignment="CENTER" GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  
+                  
+                  
+<!-- TextFields FROM GRID -->                  
+                  <TextField fx:id="textField_Site"         layoutX="104.0" layoutY="220.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                  <TextField fx:id="textField_Login"        layoutX="104.0" layoutY="220.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="textField_Pass"         layoutX="104.0" layoutY="220.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="textField_Mail"         layoutX="104.0" layoutY="220.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="textField_Tags"         layoutX="104.0" layoutY="220.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="textField_Phone"        layoutX="104.0" layoutY="220.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />                  
+                  <TextField fx:id="textField_NameSurname"  layoutX="104.0" layoutY="220.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="textField_Info"         layoutX="104.0" layoutY="220.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />                  
                </children>
             </GridPane>
-            <Button fx:id="okInfoWindow" defaultButton="true" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#startListenerInfoWindowButtons" text="OK" textAlignment="CENTER">
+
+                        
+<!-- BUTTON "OK" -->            
+            <Button fx:id="okInfoWindow" 
+                    defaultButton="true" 
+                    minHeight="25.0" minWidth="100.0" 
+                    mnemonicParsing="false"
+                    onAction="#startListenerInfoWindowButtons" 
+                    text="OK" 
+                    textAlignment="CENTER">
                <font>
                   <Font size="12.0" />
                </font>
@@ -154,7 +242,10 @@
                   <Insets bottom="10.0" left="230.0" right="10.0" />
                </VBox.margin>
             </Button>
+            
+            
          </children>
+         
       </VBox>
    </children>
 </AnchorPane>

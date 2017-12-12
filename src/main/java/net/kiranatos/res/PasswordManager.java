@@ -11,7 +11,7 @@ import net.kiranatos.PassPaths;
 public class PasswordManager {
     
     private static PasswordManager passwordManager;    
-    private ArrayList<OnePassObject> arrayListOfOnePassObject;    // main keeper for all accounts
+    private List<OnePassObject> arrayListOfOnePassObject;    // main keeper for all accounts
     private int passQuantity;
     
     private ObservableList<OnePassObject> observableListOfOnePassObject = FXCollections.observableArrayList();
@@ -33,9 +33,10 @@ public class PasswordManager {
         PasswordList m = new PasswordList();
         this.arrayListOfOnePassObject = m.load(defaultPath);
         this.passQuantity = arrayListOfOnePassObject.size();
-        createPassList(arrayListOfOnePassObject);
+        createPassList(arrayListOfOnePassObject);   // adding in observableListOfOnePassObject
         Information.println("размер ArrayList списка объектов OnePassObject =  = " + arrayListOfOnePassObject.size());        
         Information.println("размер Observable списка объектов OnePassObject = " + observableListOfOnePassObject.size());
+         
     }
 
     // *************************** GETTERS
@@ -43,7 +44,7 @@ public class PasswordManager {
      * Получить всю коллекцию логинов-паролей в формате OnePassObject
      * @return 
      */
-    public ArrayList<OnePassObject> getListOfPasswords() {
+    public List<OnePassObject> getListOfPasswords() {
         return arrayListOfOnePassObject;
     }
     
@@ -56,7 +57,23 @@ public class PasswordManager {
     }
     
     // *************************** SETTERS
+    /**
+     * Загрузить новый список лист с аккаунт-паролями
+     * Внимание: предыдущий список будет утерян !
+     */
+    public void setListOfPasswords(List<OnePassObject> list) {
+        this.arrayListOfOnePassObject = list;
+        createPassList(arrayListOfOnePassObject);   // adding in observableListOfOnePassObject
+    }
     
+    /**
+     * Создает новый ObservableList<OnePassObject> лист, предавать нечего не нужно, он сформирует всё сам.
+     * Важно: перед его вызовом нужно вызвать сеттер setListOfPasswords(ArrayList<OnePassObject> list)
+     * на основе которого и создастся ObservableList
+     *//*
+    public void setObservableList() {        
+        observableListOfOnePassObject = null;
+    }*/
 
     
     
@@ -66,6 +83,8 @@ public class PasswordManager {
      */
     //public OnePassObject getIdByLogin ();
 
+    
+    
     /**
      * toString - потом нужно переделать
      * @return 
@@ -83,11 +102,11 @@ public class PasswordManager {
     }    
     
     // *************************** OTHER METHODS:
-    private void createPassList(ArrayList<OnePassObject> list)
+    private void createPassList(List<OnePassObject> list)
     {
+        observableListOfOnePassObject.clear();
         Iterator<OnePassObject> it = list.iterator();
-        while (it.hasNext())
-        {
+        while (it.hasNext()) {
             observableListOfOnePassObject.add(it.next());
         }
     }
@@ -99,8 +118,22 @@ public class PasswordManager {
      */
     public void add(OnePassObject onePassObject) {
         observableListOfOnePassObject.add(onePassObject);
+        
         arrayListOfOnePassObject.add(onePassObject);
-        passwordManager.saveToDefaultFile(onePassObject);
+        passwordManager.saveToDefaultFile();
+    }
+    
+    /**
+     * Добавление объекта OnePassObject в список ObservableList<OnePassObject>
+     * И вызов метода saveToDefaultFile для сохранения этого объекта в файл HotSecret.dat     
+     * @param onePassObject 
+     */
+    public void delete(OnePassObject onePassObject) {
+        Information.println("delete!!!");
+        observableListOfOnePassObject.remove(onePassObject);
+        
+        arrayListOfOnePassObject.remove(onePassObject);
+        passwordManager.saveToDefaultFile();
     }
     
     /**
@@ -108,10 +141,11 @@ public class PasswordManager {
      * Внимание: метод перезаписывает весь файл, а не дописывает.
      * Возможно в будущем, стоит сделать его потоком-демоном, чтобы не происходило обрыва записи при закрытии программы.
      */
-    public void saveToDefaultFile(OnePassObject onePassObject) {
+    public void saveToDefaultFile() {
         PasswordList m = new PasswordList();        
-        m.load(PassPaths.HOT_SECRETS_PATH);
-        m.addToListOfPasswords(onePassObject);
+        //m.load(PassPaths.HOT_SECRETS_PATH);
+        //m.addToListOfPasswords(onePassObject);
+        m.setListOfPasswords(arrayListOfOnePassObject);
         m.save();
     }
     
@@ -125,6 +159,7 @@ public class PasswordManager {
      * и весь список записывается в файл
      */
     public static void createFile(){               
+        Information.println("making file");
         PasswordList m = new PasswordList();        
         m.load(PassPaths.HOT_SECRETS_PATH);
         m.addToListOfPasswords("DartVader",  "LukeIamYourFather", "www.porn.com",     "power@mail.com",    

@@ -60,6 +60,7 @@ public class HeartOfProgram {
     private int lengthForGeneratePassButton = 10;
     /* Flags for Generate Pass Button and Pass Area */
     
+    private OnePassObject selectedOPO = null;
     
     // ----------------------------------------------------- CONSTRUCTORS    
     /**
@@ -98,6 +99,11 @@ public class HeartOfProgram {
     public void setInputNewMail(TextField inputNewMail) {
         this.inputNewMail = inputNewMail;
     }
+    
+    public void setSelectedOPO(OnePassObject selectedOPO) {
+        this.selectedOPO = selectedOPO;
+    }
+    
 
     // ----------------------------------------------------- GETTERS
     /**
@@ -190,12 +196,38 @@ public class HeartOfProgram {
                 if(file != null){
                     Information.println("Был открыт файл: " + file.getName());
                     ExcelReader xlsxReader = new ExcelReader(file);
-                    List<OnePassObject> readedTempoList = xlsxReader.getArrayListOPO();                        
+                    List<OnePassObject> readedTempoList = xlsxReader.getArrayListOPO();                       
+                    
+                    for (OnePassObject opoo : readedTempoList) {
+                        System.out.println(opoo);
+                    }
+                    PasswordManager.getPasswordManager().setListOfPasswords(readedTempoList);
+                    PasswordManager.getPasswordManager().saveToDefaultFile();
                 }
+                
                 break;
             }            
             case "saveInfo" : {
                 saveData();
+                break;
+            }
+            case "deleteButtonFromTable" : {            
+                Information.println("deleteButtonFromTable");
+                if ( isSelectedOPO (this.selectedOPO) )
+                    PasswordManager.getPasswordManager().delete(this.selectedOPO);                
+                break;
+            }
+            case "dublicateButtonFromTable" : {
+                if ( isSelectedOPO (this.selectedOPO) )
+                    PasswordManager.getPasswordManager().add(this.selectedOPO);                
+                break;
+            }
+            case "editButtonFromTable" : {
+                // SomeMetod
+                break;
+            }
+            case "showInformationButtonFromTable" : {
+                // SomeMetod
                 break;
             }
             default: { Information.print("Erorr");/*throw new CheckBoxException();*/ }
@@ -316,5 +348,19 @@ public class HeartOfProgram {
             
             PasswordManager pm = PasswordManager.getPasswordManager();
             pm.add(opo);}
+    }
+    
+    /**
+     * Метод для определения была ли выбрана строка в таблице при нажатии на кнопку
+     * @param opo
+     * @return 
+     */
+    private boolean isSelectedOPO(OnePassObject opo) {
+        if(opo == null){
+            //DialogManager.showInfoDialog(resourceBundle.getString("error"), resourceBundle.getString("select_person"));
+            Information.println("В таблице нечего не было выбрано");
+            return false;
+        }
+        return true;
     }
 }
